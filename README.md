@@ -1,2 +1,2 @@
 # DATABASE-THEORY-AND-LAB
-ALL TASKS,QUIZZES,ASSIGNMENTS AND CONTENTS OF THIS COURSE WILL BE IN THIS REPO
+This repository contains assignments,quizzes, lab tasks, and resources for the DB course. 
