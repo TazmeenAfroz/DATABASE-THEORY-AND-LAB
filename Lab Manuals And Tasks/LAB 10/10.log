@@ -1,0 +1,35 @@
+240507 20:08:07	     9 Query	CREATE INDEX idx_park_name ON THEMEPARK(PARK_NAME)
+240507 20:08:18	     9 Query	CREATE INDEX idx_park_city_country ON THEMEPARK (PARK_CITY, PARK_COUNTRY)
+240507 20:08:26	     9 Query	SHOW INDEX FROM THEMEPARK
+240507 20:09:10	     9 Query	CREATE DATABASE nutec
+240507 20:09:19	     9 Query	SELECT DATABASE()
+		     9 Init DB	nutec
+		     9 Query	show databases
+		     9 Query	show tables
+240507 20:09:27	     9 Query	CREATE TABLE registrations (
+  id INT AUTO_INCREMENT,
+  roll_no VARCHAR(20),
+  name VARCHAR(50),
+  email VARCHAR(100),
+  department VARCHAR(50),
+  event VARCHAR(50),
+  PRIMARY KEY (id)
+)
+240507 20:10:12	     9 Query	CREATE INDEX idx_roll_no ON registrations(roll_no)
+		     9 Query	CREATE INDEX idx_event ON registrations(event)
+		     9 Query	CREATE INDEX idx_department ON registrations(department)
+240507 20:18:25	    10 Connect	root@localhost as anonymous on nutec
+		    10 Query	INSERT INTO registrations (roll_no, name, email, department, event) VALUES ('22P-9252','tazmeen','tazmeen@gmail.com','Artificial Intelligence','AI Build')
+		    10 Quit	
+240507 20:19:19	    11 Connect	root@localhost as anonymous on nutec
+		    11 Query	SELECT * FROM registrations WHERE roll_no ='22P-9252'
+		    11 Quit	
+240507 20:19:33	    12 Connect	root@localhost as anonymous on nutec
+		    12 Query	SELECT * FROM registrations WHERE event ='AI Build'
+		    12 Quit	
+240507 20:19:38	    13 Connect	root@localhost as anonymous on nutec
+		    13 Query	SELECT * FROM registrations WHERE department ='AI'
+		    13 Quit	
+240507 20:19:51	    14 Connect	root@localhost as anonymous on nutec
+		    14 Query	SELECT * FROM registrations WHERE department ='Artificial Intelligence'
+		    14 Quit	

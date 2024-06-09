@@ -1,0 +1,125 @@
+240420 18:10:46	     9 Query	CREATE DATABASE person
+240420 18:10:54	     9 Query	SELECT DATABASE()
+		     9 Init DB	person
+		     9 Query	show databases
+		     9 Query	show tables
+240420 18:11:11	     9 Query	CREATE TABLE Users (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  user_id INT,
+  username VARCHAR(255),
+  password VARCHAR(255),
+  email VARCHAR(255)
+) 
+
+CREATE TABLE Summary (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  total_user INT,
+  Yahoo INT,
+  Hotmail INT,
+  Gmail INT
+)
+240420 18:11:29	     9 Query	CREATE TABLE Users (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  user_id INT,
+  username VARCHAR(255),
+  password VARCHAR(255),
+  email VARCHAR(255)
+)
+		     9 Query	CREATE TABLE Summary (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  total_user INT,
+  Yahoo INT,
+  Hotmail INT,
+  Gmail INT
+)
+240420 18:13:48	     9 Query	CREATE PROCEDURE insert_summary (
+  IN id INT ,
+  IN total_user INT,  
+  IN Yahoo INT,
+  IN Hotmail INT,
+  IN Gmail INT
+)
+BEGIN
+  INSERT INTO Summary (id, total_user, Yahoo, Hotmail, Gmail)
+  VALUES (id, total_user, Yahoo, Hotmail, Gmail);
+END
+240420 18:14:03	     9 Query	CREATE PROCEDURE insert_users(
+  IN user_id INT,
+  IN username VARCHAR(255),
+  IN password VARCHAR(255),
+  IN email VARCHAR(255)
+)
+BEGIN
+  INSERT INTO Users (user_id, username, password, email)
+  VALUES (user_id, username, password, email);
+END
+240420 18:15:25	     9 Query	CREATE PROCEDURE AVG_YAHOO(OUT  avg_yahoo decimal)
+BEGIN
+  SELECT AVG(Yahoo) INTO avg_yahoo
+  FROM Summary;
+END
+240420 18:15:35	     9 Query	CREATE PROCEDURE MIN_GMAIL(OUT  min_gmail decimal)
+BEGIN
+  SELECT MIN(Gmail) INTO min_gmail
+  FROM Summary;
+END
+240420 18:16:27	     9 Query	CREATE PROCEDURE MAX_HOTMAIL(OUT  max_hotmail decimal)
+BEGIN
+  SELECT MAX(Hotmail) INTO max_hotmail
+  FROM Summary;
+END
+240420 18:16:38	     9 Query	CREATE PROCEDURE INC_TOTAL_USER(
+  IN Yahoo INT,
+  IN Hotmail INT
+)
+BEGIN
+UPDATE summary
+    SET total_user = total_user + 1
+    WHERE Yahoo <= Hotmail;
+END
+240420 18:18:20	     9 Query	CREATE TRIGGER tr_insert_users
+AFTER INSERT ON Users
+FOR EACH ROW
+BEGIN
+  UPDATE Summary
+  SET total_user = total_user + 1;
+END
+240420 18:18:30	     9 Query	CREATE TRIGGER tr_delete_users
+AFTER DELETE ON Users
+FOR EACH ROW
+BEGIN
+  UPDATE Summary
+  SET total_user = total_user - 1;
+END
+240420 18:18:53	     9 Query	CALL insert_summary(0,0,0,0,0)
+240420 18:19:04	     9 Query	CALL insert_users(1, 'john_doe', 'password123', 'john@yahoo.com')
+		     9 Query	CALL insert_users(2, 'jane_smith', 'qwerty123', 'jane@hotmail.com')
+		     9 Query	CALL insert_users(3, 'bob_johnson', 'abc123', 'bob@gmail.com')
+		     9 Query	CALL insert_users(4, 'sarah_wilson', 'pass456', 'sarah@yahoo.com')
+		     9 Query	CALL insert_users(5, 'mike_brown', 'password789', 'mike@hotmail.com')
+		     9 Query	CALL insert_users(6, 'emily_taylor', 'qwerty456', 'emily@gmail.com')
+240420 18:19:05	     9 Query	CALL insert_users(7, 'david_anderson', 'letmein123', 'david@yahoo.com')
+		     9 Query	CALL insert_users(8, 'jessica_thompson', 'password987', 'jessica@hotmail.com')
+		     9 Query	CALL insert_users(9, 'michael_jackson', 'abc456', 'michael@gmail.com')
+		     9 Query	CALL insert_users(10, 'ashley_garcia', 'pass123', 'ashley@yahoo.com')
+240420 18:19:55	     9 Query	SELECT * FROM Summary
+240420 18:20:08	     9 Query	SELECT * FROM users
+240420 18:20:21	     9 Query	SELECT * FROM Users
+240420 18:20:29	     9 Query	DELETE FROM Users WHERE id = 5
+		     9 Query	UPDATE Summary
+  SET total_user = total_user - 1
+240420 18:28:56	     9 Query	CREATE VIEW p_view AS
+SELECT * FROM PRODUCT
+240420 18:29:00	     9 Query	SET @update_from_view := 1;
+UPDATE p_view SET P_PRICE = 100 WHERE P_MIN > 20;
+SET @update_from_view := NULL
+		     9 Query	SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Updates from views are not allowed on this table.'
+240420 18:29:59	     9 Query	UPDATE p_view SET P_PRICE = 100 WHERE P_MIN > 20
+		     9 Query	SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Updates from views are not allowed on this table.'
+240420 18:31:19	     9 Query	UPDATE PRODUCT SET P_PRICE = 100 WHERE P_MIN > 20
+		     9 Query	SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Updates from views are not allowed on this table.'
+240420 18:33:28	     9 Query	SET @update_from_view := NULL
+240420 18:33:34	     9 Query	UPDATE PRODUCT SET P_PRICE = 100 WHERE P_MIN > 20

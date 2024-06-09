@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nutec'24 Event Registration Search</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Nutec'24 Event Registration Search</h1>
+    <form action="search.php" method="post">
+        <label for="search_by">Search by:</label>
+        <select id="search_by" name="search_by">
+            <option value="roll_no">Roll No</option>
+            <option value="event">Event</option>
+            <option value="department">Department</option>
+        </select><br><br>
+        <label for="search_data">Enter data:</label>
+        <input type="text" id="search_data" name="search_data"><br><br>
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>
+
