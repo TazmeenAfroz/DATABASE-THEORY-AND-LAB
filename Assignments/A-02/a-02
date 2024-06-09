@@ -1,0 +1,19 @@
+Q1) Download and Install Microsoft SQL server, and Microsoft SQL Server
+Management Studio.
+Q2) Download and Install Visual Studio inorder to use C# programming language.
+Q3) Write a GUI based program on C# where you will create a calculator that can
+perform these operations.
+a. Addition
+b. Subtraction
+c. Multiplication
+d. Division
+e. Square
+f. Square Root
+Q4) Create a Database named ‘CalculatorDB’ using Microsoft SQL(SSMS). Create
+tables for each operation (e.g., Addition_table) with appropriate columns to store
+input values and results.
+Q5) Connect your C# application to the CalculatorDB database. Implement CRUD
+operations to store and retrieve data from the tables.
+
+
+Solution -> https://github.com/TazmeenAfroz/C-Calculator-Application
